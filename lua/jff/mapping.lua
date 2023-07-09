@@ -1,14 +1,14 @@
--- Open explorer
+--cat Open explorer
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 -- Save file
-vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>")
+ vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>")
 
 -- Quick add comment
 vim.keymap.set("n", "<leader>/",
-function()
-    require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1)
-end)
+    function()
+        require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1)
+    end)
 
 -- vim.keymap.set("n", "", "")
 
@@ -18,7 +18,7 @@ vim.keymap.set("n", "J", "mzJ`z")
 -- Paste over highlight without losing date in register
 vim.keymap.set("x", "<leader>p", "\"_dP")
 
--- Enter system register mode for easy copying 
+-- Enter system register mode for easy copying
 vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
@@ -30,7 +30,7 @@ vim.keymap.set("n", "<leader>f", function()
 end)
 
 -- Make current file executable
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true } )
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- Center on big moves
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
