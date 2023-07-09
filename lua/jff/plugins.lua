@@ -14,6 +14,16 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
     },
+    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
+    {
+        'stevearc/aerial.nvim',
+        opts = {},
+        -- Optional dependencies
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-tree/nvim-web-devicons"
+        },
+    },
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
     {"ThePrimeagen/harpoon"},
     {
@@ -43,7 +53,7 @@ return {
             {'hrsh7th/cmp-buffer'},
             {'hrsh7th/cmp-path'},
             {'hrsh7th/cmp-nvim-lsp'},
-		    {'hrsh7th/cmp-nvim-lua'},
+            {'hrsh7th/cmp-nvim-lua'},
             {'saadparwaiz1/cmp_luasnip'},
 
             -- Snippets
@@ -68,12 +78,15 @@ return {
         end
     },
     {
-     "folke/trouble.nvim",
-     dependencies = { "nvim-tree/nvim-web-devicons" },
-     opts = {
-          -- your configuration comes here
-          -- or leave it empty to use the default settings
-          -- refer to the configuration section below
-         },
-     }
+        "folke/trouble.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        },
+    },
+    {
+        "nvim-lualine/lualine.nvim"
+    }
 }
