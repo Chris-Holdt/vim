@@ -1,1 +1,8 @@
-vim.keymap.set("n", "<leader>gg", "<Cmd>LazyGit<CR>")
+local wk = require("which-key")
+
+wk.register({
+  ["<leader>g"] = {
+    name = "Git",
+    g = { "<Cmd>LazyGit<CR>", "Open LazyGit" }
+  }
+})

@@ -1,7 +1,7 @@
 local lsp = require('lsp-zero').preset({})
 
 lsp.on_attach(function(client, bufnr)
-  lsp.default_keymaps({buffer = bufnr})
+  lsp.default_keymaps({ buffer = bufnr })
 end)
 
 lsp.configure('lua_ls', {
@@ -26,7 +26,7 @@ lsp.configure('lua_ls', {
 })
 
 local cmp = require('cmp')
-local cmp_select = {behavior = cmp.SelectBehavior.Select}
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<C-j>'] = cmp.mapping.select_prev_item(cmp_select),
   ['<C-k>'] = cmp.mapping.select_next_item(cmp_select),

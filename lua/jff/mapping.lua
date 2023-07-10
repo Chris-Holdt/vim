@@ -1,48 +1,62 @@
---cat Open explorer
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+local wk = require("which-key")
 
--- Save file
- vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>")
-
--- Quick add comment
-vim.keymap.set("n", "<leader>/",
-    function()
+wk.register({
+  ["<leader>"] = {
+    p = {
+      name = "File commands",
+      v = { vim.cmd.Ex, "Open explorer" },
+      f = {
+        function()
+          vim.lsp.buf.format()
+        end,
+        "Format file"
+      },
+    },
+    w = {
+      function()
+        vim.lsp.buf.format()
+        vim.cmd("w")
+      end,
+      "Format and save"
+    },
+    ["/"] = {
+      function()
         require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1)
-    end)
+      end,
+      "Comment line"
+    },
+    b = {
+      name = "Buffers",
+      d = { ":bd<CR>", "Close the current buffer" }
+    }
+  },
+  J = { "mzJ z", "Append line below to the end of current, maintain cursor pos" },
+  ["<A-k>"] = { ":m .-2<CR>==", "Move highlight up" },
+  ["<A-j>"] = { ":m .+1<CR>==", "Move highlight down" },
+  ["<C-u>"] = { "<C-u>zz", "Up half page and center" },
+  ["<C-d>"] = { "<C-d>zz", "Down half page and center" },
+  n = { "nzzzv", "Next search result and center" },
+  N = { "Nzzzv", "Previous search result and center" },
+}, {
+  mode = "n",
+})
 
--- vim.keymap.set("n", "", "")
+wk.register({
+  name = "Highlight moving",
+  ["<A-k>"] = { "<-2<CR>gv=gv", "Move highlight up" },
+  ["<A-j>"] = { ">+1<CR>gv=gv", "Move highlight down" }
+}, {
+  mode = "v",
+})
 
--- Append line below to end of this line, maintain cursor position
-vim.keymap.set("n", "J", "mzJ`z")
-
--- Paste over highlight without losing date in register
-vim.keymap.set("x", "<leader>p", "\"_dP")
-
--- Enter system register mode for easy copying
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("v", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>Y", "\"+Y")
+wk.register({
+  name = "Paste over",
+  ["<leader>p"] = { mode = "x", "\"_dP", "Paste over highlight without using register" },
+}, {
+  mode = "x"
+})
 
 vim.keymap.set("n", "Q", "<nop>")
 
-vim.keymap.set("n", "<leader>f", function()
-    vim.lsp.buf.format()
-end)
-
 -- Make current file executable
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-
--- Center on big moves
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
-
--- Move lines up and down
-vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
-vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
-vim.keymap.set("v", "<A-k>", "<-2<CR>gv=gv")
-vim.keymap.set("v", "<A-j>", ">+1<CR>gv=gv")
-
--- Close the current buffer
-vim.keymap.set("n", "<leader>bd", ":bd<CR>")
+-- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
