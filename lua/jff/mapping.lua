@@ -2,6 +2,14 @@ local wk = require("which-key")
 
 wk.register({
   ["<leader>"] = {
+    c = {
+      name = "Colourscheme quick switch",
+      d = {
+        ":colorscheme catppuccin-latte <CR>",
+        "Day mode: Catppuccin Latte"
+      },
+      n = { ":colorscheme spacerain <CR>", "Night mode: Spacerain" },
+    },
     p = {
       name = "File commands",
       v = { vim.cmd.Ex, "Open explorer" },
@@ -21,7 +29,9 @@ wk.register({
     },
     ["/"] = {
       function()
-        require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1)
+        require("Comment.api").toggle.linewise.count(
+          vim.v.count > 0 and vim.v.count or 1
+        )
       end,
       "Comment line"
     },
@@ -30,7 +40,10 @@ wk.register({
       d = { ":bd<CR>", "Close the current buffer" }
     }
   },
-  J = { "mzJ z", "Append line below to the end of current, maintain cursor pos" },
+  J = {
+    "mzJ z",
+    "Append line below to the end of current, maintain cursor pos"
+  },
   ["<A-k>"] = { ":m .-2<CR>==", "Move highlight up" },
   ["<A-j>"] = { ":m .+1<CR>==", "Move highlight down" },
   ["<C-u>"] = { "<C-u>zz", "Up half page and center" },
@@ -51,7 +64,9 @@ wk.register({
 
 wk.register({
   name = "Paste over",
-  ["<leader>p"] = { mode = "x", "\"_dP", "Paste over highlight without using register" },
+  ["<leader>p"] = {
+    mode = "x", "\"_dP",
+    "Paste over highlight without using register" },
 }, {
   mode = "x"
 })
