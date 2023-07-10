@@ -31,6 +31,8 @@ vim.keymap.set('n', '<leader>lf', builtin.lsp_references, {})
 -- LSP Diagnostics, errors, warnings, suggestions
 vim.keymap.set('n', '<leader>df', builtin.diagnostics, {})
 
+-- Run make and open telescope quickfix
+vim.keymap.set("n", "<A-m>", ":make!<CR>:Telescope quickfix<CR>")
 -- Shows quickfix items
 vim.keymap.set('n', '<leader>qf', builtin.quickfix, {})
 
