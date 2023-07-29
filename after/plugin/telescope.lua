@@ -21,6 +21,7 @@ wk.register({
       r = { builtin.registers, "Show registers" },
       f = { builtin.current_buffer_fuzzy_find, "Fuzzy find across the current buffer" },
       m = { ":make!<CR>:Telescope quickfix<CR>", "Run make and show quickfix list" },
+      ["<CR>"] = { builtin.resume, "Resume last search" }
     }
   }
 })
