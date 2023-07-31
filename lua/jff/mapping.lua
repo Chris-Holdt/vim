@@ -1,6 +1,10 @@
 local wk = require("which-key")
 
 wk.register({
+  ["<C-l>"] = { "<C-w>l", "Move to split on right" },
+  ["<C-h>"] = { "<C-w>h", "Move to split on left" },
+  ["<C-Left>"] = { "<CMD>vertical resize -2<CR>", "Resize split left" },
+  ["<C-Right>"] = { "<CMD>vertical resize +2<CR>", "Resize split right" },
   ["<leader>"] = {
     c = {
       name = "Colourscheme quick switch",
