@@ -41,7 +41,11 @@ wk.register({
     },
     b = {
       name = "Buffers",
-      d = { ":bd<CR>", "Close the current buffer" }
+      d = {
+        name = "Delete buffer/s",
+        c = { ":bd<CR>", "Close the current buffer" },
+        o = { ":%bd|e#<CR>", "Close all buffers except this one" },
+      }
     }
   },
   J = {
@@ -61,7 +65,11 @@ wk.register({
 wk.register({
   name = "Highlight moving",
   ["<A-k>"] = { "<-2<CR>gv=gv", "Move highlight up" },
-  ["<A-j>"] = { ">+1<CR>gv=gv", "Move highlight down" }
+  ["<A-j>"] = { ">+1<CR>gv=gv", "Move highlight down" },
+  ["<Leader>/"] = {
+    "<ESC><CMD>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+    "Toggle comment for selection",
+  }
 }, {
   mode = "v",
 })
