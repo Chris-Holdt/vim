@@ -4,10 +4,15 @@ local ui = require("harpoon.ui")
 local wk = require("which-key")
 
 wk.register({
-  ["<leader>aa"] = { mark.add_file, "Add file to Harpoon" },
+  ["<leader>h"] = {
+    name = "Harpoon",
+    a = { mark.add_file, "Add file to Harpoon" },
+    m = { ui.toggle_quick_menu, "Open Harpoon Quick menu" },
+  },
   ["<A-m>"] = { ui.toggle_quick_menu, "Open Harpoon Quick menu" },
-  ["<A-q>"] = { function() ui.nav_file(1) end, "Switch to Harpoon marker 1" },
-  ["<A-w>"] = { function() ui.nav_file(2) end, "Switch to Harpoon marker 2" },
-  ["<A-e>"] = { function() ui.nav_file(3) end, "Switch to Harpoon marker 3" },
-  ["<A-r>"] = { function() ui.nav_file(4) end, "Switch to Harpoon marker 4" },
+  ["<A-y>"] = { function() ui.nav_file(1) end, "Switch to Harpoon marker 1" },
+  ["<A-u>"] = { function() ui.nav_file(2) end, "Switch to Harpoon marker 2" },
+  ["<A-i>"] = { function() ui.nav_file(3) end, "Switch to Harpoon marker 3" },
+  ["<A-o>"] = { function() ui.nav_file(4) end, "Switch to Harpoon marker 4" },
+  ["<A-p>"] = { function() ui.nav_file(5) end, "Switch to Harpoon marker 5" },
 })
