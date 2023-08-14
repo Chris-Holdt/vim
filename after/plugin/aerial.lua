@@ -1,3 +1,5 @@
+local wk = require("which-key")
+
 require('aerial').setup({
   -- optionally use on_attach to set keymaps when aerial has attached to a buffer
   on_attach = function(bufnr)
@@ -11,11 +13,9 @@ require('aerial').setup({
     }
   end
 })
--- You probably also want to set a keymap to toggle aerial
-
-local wk = require("which-key")
 
 wk.register({
-  ["<leader>at"] = { "<cmd>AerialToggle!<CR>", "Toggle Aerial Symbol outline" }
+  ["<leader>a"] = {
+    name = "Aerial",
+    t = { "<cmd>AerialToggle!<CR>", "Toggle Aerial Symbol outline" } }
 })
--- vim.keymap.set('n', '<leader>af', '<cmd>AerialToggle!<CR>')
