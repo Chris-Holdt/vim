@@ -68,6 +68,13 @@ return {
   },
   { "numToStr/Comment.nvim" },
   {
+    "L3MON4D3/LuaSnip",
+    -- follow latest release.
+    version = "2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    -- install jsregexp (optional!).
+    build = "make install_jsregexp"
+  },
+  {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
     opts = {}
@@ -107,5 +114,8 @@ return {
       -- refer to the configuration section below
     }
   },
-  { "lewis6991/gitsigns.nvim" }
+  { "lewis6991/gitsigns.nvim" },
+  {
+    "fatih/vim-go"
+  }
 }
