@@ -1,12 +1,52 @@
 local builtin = require('telescope.builtin')
+local actions = require('telescope.actions')
+local toggle_preview = require('telescope.actions.layout').toggle_preview
 
 require('telescope').load_extension('fzf')
+
+require('telescope').setup {
+  defaults = {
+    winblend = 70,
+
+    preview = {
+      hide_on_startup = true,
+      file_ignore_patters = { ".git/", "node_modules" },
+    },
+
+    layout_config = {
+      height = 80,
+      width = 0.9,
+    },
+
+    mappings = {
+      i = {
+        ["<esc>"] = actions.close,
+        ["<M-p>"] = toggle_preview
+      },
+      n = {
+        ["<M-p>"] = toggle_preview
+      },
+    }
+  },
+
+  -- pickers = {
+  --   diagnostics = {
+  --     theme = "ivy",
+  --   },
+  --   quickfix = {
+  --     theme = "ivy",
+  --   },
+  --   keymaps = {
+  --     theme = "ivy",
+  --   },
+  -- }
+}
 
 local wk = require("which-key")
 
 wk.register({
   ["<leader>"] = {
-    u = { "<Cmd> Telescope undo <CR>", "Show undo tree" },
+    u = { "<Cmd> Telescope undo theme=dropdown<CR>", "Show undo tree" },
     f = {
       name = "Telescopy",
       k = { builtin.keymaps, "List keymaps" },
