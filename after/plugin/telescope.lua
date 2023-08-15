@@ -14,6 +14,7 @@ wk.register({
       o = { builtin.oldfiles, "List previosuly open files" },
       g = { builtin.git_files, "List git project files, ignores files in gitignore" },
       s = { builtin.live_grep, "Grep search in files" },
+      c = { builtin.grep_string, "Grep search for string under cursor in CWD" },
       b = { builtin.buffers, "List open buffers" },
       l = { builtin.lsp_references, "LSP References, lists defs and uses" },
       d = { builtin.diagnostics, "Show diagnostics" },
