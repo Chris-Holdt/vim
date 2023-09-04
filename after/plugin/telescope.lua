@@ -6,7 +6,7 @@ require('telescope').load_extension('fzf')
 
 require('telescope').setup {
   defaults = {
-    winblend = 70,
+    winblend = 30,
 
     preview = {
       hide_on_startup = true,

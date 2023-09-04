@@ -38,6 +38,7 @@ return {
       "nvim-lua/plenary.nvim",
     },
   },
+  { 'neovim/nvim-lspconfig' },
   {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v2.x',
