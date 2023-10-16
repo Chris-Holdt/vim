@@ -48,6 +48,13 @@ wk.register({
         c = { ":bd<CR>", "Close the current buffer" },
         o = { ":%bd|e#<CR>", "Close all buffers except this one" },
       }
+    },
+    t = {
+      name = "Tabs",
+      N = { ":tabNext<CR>", "Previous Tab" },
+      n = { ":tabnext<CR>", "Next Tab" },
+      c = { ":tabclose<CR>", "Close Tab" },
+      t = { ":tabnew", "New Tab" },
     }
   },
   J = {
