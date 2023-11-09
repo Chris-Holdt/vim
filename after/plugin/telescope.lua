@@ -3,13 +3,14 @@ local actions = require('telescope.actions')
 local toggle_preview = require('telescope.actions.layout').toggle_preview
 
 require('telescope').load_extension('fzf')
+require('telescope').load_extension('undo')
 
 require('telescope').setup {
   defaults = {
     winblend = 30,
 
     preview = {
-      hide_on_startup = true,
+      hide_on_startup = false,
       file_ignore_patters = { ".git/", "node_modules" },
     },
 
@@ -21,7 +22,7 @@ require('telescope').setup {
     mappings = {
       i = {
         ["<esc>"] = actions.close,
-        ["<M-p>"] = toggle_preview
+        ["<M-p>"] = toggle_preview,
       },
       n = {
         ["<M-p>"] = toggle_preview
@@ -29,17 +30,21 @@ require('telescope').setup {
     }
   },
 
-  -- pickers = {
-  --   diagnostics = {
-  --     theme = "ivy",
-  --   },
-  --   quickfix = {
-  --     theme = "ivy",
-  --   },
-  --   keymaps = {
-  --     theme = "ivy",
-  --   },
-  -- }
+  pickers = {
+    buffers = {
+      show_all_buffers = true,
+      previewer = true,
+      mappings = {
+        i = {
+          ["<C-b>"] = actions.delete_buffer,
+        },
+        n = {
+          ["<C-b>"] = actions.delete_buffer,
+        }
+      }
+    }
+  }
+
 }
 
 local wk = require("which-key")
