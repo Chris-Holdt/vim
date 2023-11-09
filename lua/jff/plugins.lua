@@ -6,14 +6,12 @@ return {
       'nvim-lua/plenary.nvim',
       "debugloop/telescope-undo.nvim",
     },
-    config = function()
-      require("telescope").load_extension("undo")
-    end,
   },
   { "nvim-lua/plenary.nvim" },
   { "nvim-tree/nvim-web-devicons" },
   {
     "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate"
   },
   {
     'nvim-telescope/telescope-fzf-native.nvim',
@@ -67,7 +65,10 @@ return {
       { 'rafamadriz/friendly-snippets' },
     }
   },
-  { "numToStr/Comment.nvim" },
+  {
+    "numToStr/Comment.nvim",
+    lazy = false
+  },
   {
     "L3MON4D3/LuaSnip",
     -- follow latest release.
@@ -84,20 +85,11 @@ return {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup({
-        -- Configuration here, or leave empty to use defaults
-      })
-    end
   },
   {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    },
+    opts = {},
   },
   {
     "nvim-lualine/lualine.nvim"
@@ -109,14 +101,68 @@ return {
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    }
+    opts = {}
   },
   { "lewis6991/gitsigns.nvim" },
   {
     "fatih/vim-go"
+  },
+  {
+    "tpope/vim-dadbod",
+    opt = true,
+    requires = {
+      "kristijanhusak/vim-dadbod-ui",
+      "kristijanhusak/vim-dadbod-completion"
+    },
+  },
+  {
+    "kristijanhusak/vim-dadbod-ui"
+  },
+  {
+    "kristijanhusak/vim-dadbod-completion"
+  },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {},
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    }
+  },
+  {
+    "lewis6991/hover.nvim",
+  },
+  {
+    "brenoprata10/nvim-highlight-colors"
+  },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = {
+      "kevinhwang91/promise-async"
+    }
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {}
+  },
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+    event = "VeryLazy"
+  },
+  {
+    "niuiic/code-shot.nvim",
+    dependencies = {
+      "niuiic/core.nvim",
+    }
   }
 }
