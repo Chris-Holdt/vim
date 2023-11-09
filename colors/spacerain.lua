@@ -8,6 +8,7 @@ local colors = {
   Comment = { fg = "#597882" },
   Conceal = { bg = "#4B5558" },
   Constant = { fg = "#F7E37E" },
+  ColorColumn = { bg = "#4F4171" },
   Cursor = { fg = "#2D2541", bg = "#F6F4FB" },
   CursorColumn = { bg = "#2D2541", fg = "#F6F4FB" },
   CursorLine = { bg = "#4F4171" },

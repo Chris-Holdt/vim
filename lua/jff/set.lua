@@ -37,4 +37,4 @@ vim.o.foldcolumn = "1"    -- Number of fold columns to display
 vim.o.foldlevel = 99      -- Folds with higherr level will be closed
 vim.o.foldlevelstart = 99 -- Sets foldlevel when starting to edit another buffer in a window
 vim.o.foldenable = true   -- All folds are closed
--- vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:, , ]]
+vim.o.fillchars = [[foldopen:,foldclose:]]

@@ -17,18 +17,18 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
   vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#9EED73" })
   vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#BB8AFF" })
   vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#8AEFFF" })
+  vim.api.nvim_set_hl(0, "IblScope", { fg = "#BB8AFF" })
 end)
 
 vim.g.rainbow_delimiters = { highlight = highlight }
 
 require("ibl").setup {
   indent = {
-    -- char = "▎",
-    highlight = highlight,
+    -- highlight = highlight
   },
   scope = {
+    -- highlight = highlight,
     enabled = true,
-    highlight = highlight,
     show_start = true,
     show_end = false,
     show_exact_scope = false,
