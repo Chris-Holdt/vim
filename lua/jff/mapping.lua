@@ -8,6 +8,14 @@ wk.register({
   ["<C-Left>"] = { "<CMD>vertical resize -2<CR>", "Resize split left" },
   ["<C-Right>"] = { "<CMD>vertical resize +2<CR>", "Resize split right" },
   ["<leader>"] = {
+    b = {
+      name = "Buffers",
+      d = {
+        name = "Delete buffer/s",
+        c = { ":bd<CR>", "Close the current buffer" },
+        o = { ":%bd|e#<CR>", "Close all buffers except this one" },
+      }
+    },
     c = {
       name = "Colourscheme quick switch",
       d = {
@@ -15,6 +23,19 @@ wk.register({
         "Day mode: Catppuccin Latte"
       },
       n = { ":colorscheme spacerain <CR>", "Night mode: Spacerain" },
+    },
+    d = {
+      name = "Database",
+      b = {
+        "<CMD>DBUIToggle<CR>",
+        "Open Dadbod UI"
+      }
+    },
+    s = {
+      function()
+        require("code-shot").shot()
+      end,
+      "Screenshot"
     },
     p = {
       name = "File commands",
@@ -33,22 +54,6 @@ wk.register({
       end,
       "Format and save"
     },
-    ["/"] = {
-      function()
-        require("Comment.api").toggle.linewise.count(
-          vim.v.count > 0 and vim.v.count or 1
-        )
-      end,
-      "Comment line"
-    },
-    b = {
-      name = "Buffers",
-      d = {
-        name = "Delete buffer/s",
-        c = { ":bd<CR>", "Close the current buffer" },
-        o = { ":%bd|e#<CR>", "Close all buffers except this one" },
-      }
-    }
   },
   J = {
     "mzJ z",
@@ -65,13 +70,23 @@ wk.register({
 })
 
 wk.register({
+  name = "Screenshot",
+  ["<leader>s"] = {
+    mode = "v",
+    function()
+      require("code-shot").shot()
+    end,
+    "Take a Screenshot of the current selection"
+  },
+  {
+    mode = "v",
+  }
+})
+
+wk.register({
   name = "Highlight moving",
   ["<A-k>"] = { "<-2<CR>gv=gv", "Move highlight up" },
   ["<A-j>"] = { ">+1<CR>gv=gv", "Move highlight down" },
-  ["<Leader>/"] = {
-    "<ESC><CMD>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-    "Toggle comment for selection",
-  }
 }, {
   mode = "v",
 })
@@ -79,7 +94,8 @@ wk.register({
 wk.register({
   name = "Paste over",
   ["<leader>p"] = {
-    mode = "x", "\"_dP",
+    mode = "x",
+    "\"_dP",
     "Paste over highlight without using register" },
 }, {
   mode = "x"
