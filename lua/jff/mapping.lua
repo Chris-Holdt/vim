@@ -54,6 +54,13 @@ wk.register({
       end,
       "Format and save"
     },
+    t = {
+      name = "Tabs",
+      N = { ":tabNext<CR>", "Previous Tab" },
+      n = { ":tabnext<CR>", "Next Tab" },
+      c = { ":tabclose<CR>", "Close Tab" },
+      t = { ":tabnew", "New Tab" },
+    }
   },
   J = {
     "mzJ z",
