@@ -4,7 +4,17 @@ require 'nvim-treesitter.configs'.setup {
     "gomod",
     "html",
     "json",
-    "javascript", "typescript", "go", "haskell", "rust", "c", "lua", "vim", "vimdoc", "query" },
+    "javascript",
+    "typescript",
+    "go",
+    "haskell",
+    "rust",
+    "c",
+    "lua",
+    "vim",
+    "vimdoc",
+    "query"
+  },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -22,4 +32,48 @@ require 'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
+  indent = {
+    enable = true,
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "<C-Space>",
+      node_incremental = "<C-Space>",
+      scope_incremental = false,
+      node_decremental = "<bs>",
+    }
+  },
+  textobjects = {
+    select = {
+      enable = true,
+
+      lookahead = true,
+
+      keymaps = {
+        ["a="] = { query = "@assignment.outer", desc = "Select outer part of an assignment" },
+        ["i="] = { query = "@assignment.inner", desc = "Select inner part of an assignment" },
+        ["l="] = { query = "@assignment.lhs", desc = "Select left hand side of an assignment" },
+        ["r="] = { query = "@assignment.rhs", desc = "Select right hand side of an assignment" },
+
+        ["aa"] = { query = "@parameter.outer", desc = "Select outer part of a parameter" },
+        ["ia"] = { query = "@parameter.inner", desc = "Select inner part of a parameter" },
+
+        ["ai"] = { query = "@conditional.outer", desc = "Select outer part of a conditional" },
+        ["ii"] = { query = "@conditional.inner", desc = "Select inner part of a conditional" },
+
+        ["al"] = { query = "@loop.outer", desc = "Select outer part of a loop" },
+        ["il"] = { query = "@loop.inner", desc = "Select inner part of a loop" },
+
+        ["af"] = { query = "@call.outer", desc = "Select outer part of a function call" },
+        ["if"] = { query = "@call.inner", desc = "Select inner part of a function call" },
+
+        ["am"] = { query = "@function.outer", desc = "Select outer part of a method/function def" },
+        ["im"] = { query = "@function.inner", desc = "Select inner part of a method/function def" },
+
+        --[[ ["af"] = { query = "@call.outer", desc = "Select outer part of a function call" },
+        ["if"] = { query = "@call.inner", desc = "Select inner part of a function call" }, ]]
+      }
+    }
+  }
 }

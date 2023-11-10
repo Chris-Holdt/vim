@@ -11,7 +11,13 @@ return {
   { "nvim-tree/nvim-web-devicons" },
   {
     "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate"
+    build = ":TSUpdate",
+    dependencies = {
+      {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        lazy = true
+      },
+    }
   },
   {
     'nvim-telescope/telescope-fzf-native.nvim',
