@@ -31,6 +31,23 @@ require('telescope').setup {
   },
 
   pickers = {
+    lsp_references = {
+      previewer = true,
+      theme = "cursor",
+      layout_config = {
+        height = 30,
+        width = 0.4,
+      },
+      jump_type = "never",
+    },
+    lsp_definitions = {
+      previewer = true,
+      theme = "cursor",
+      layout_config = {
+        height = 30,
+        width = 0.4,
+      },
+    },
     buffers = {
       show_all_buffers = true,
       previewer = true,
@@ -67,7 +84,16 @@ wk.register({
       r = { builtin.registers, "Show registers" },
       f = { builtin.current_buffer_fuzzy_find, "Fuzzy find across the current buffer" },
       m = { ":make!<CR>:Telescope quickfix<CR>", "Run make and show quickfix list" },
+      t = { ":TodoTelescope<CR>", "List Todos" },
       ["<CR>"] = { builtin.resume, "Resume last search" }
     }
+  },
+  gr = {
+    builtin.lsp_references,
+    "[G]oto [R]eference",
+  },
+  gd = {
+    builtin.lsp_definitions,
+    "[G]oto [D]efinitions",
   }
 })

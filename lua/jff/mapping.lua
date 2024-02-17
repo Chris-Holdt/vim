@@ -8,6 +8,11 @@ wk.register({
   ["<C-Left>"] = { "<CMD>vertical resize -2<CR>", "Resize split left" },
   ["<C-Right>"] = { "<CMD>vertical resize +2<CR>", "Resize split right" },
   ["<leader>"] = {
+    e = {
+      name = "Window setup",
+      s = { "<C-w>h<C-w>h<C-w>=26<C-w><<C-w>l<C-w>l26<C-w><<C-w>h", "Big center, smaller left and right" },
+      e = { "<C-w>v<C-w>v<C-w>h<C-w>h<C-w>=26<C-w><<C-w>l<C-w>l26<C-w><<C-w>h", "Open and Big center" }
+    },
     b = {
       name = "Buffers",
       d = {
@@ -55,11 +60,17 @@ wk.register({
       "Format and save"
     },
     t = {
-      name = "Tabs",
-      N = { ":tabNext<CR>", "Previous Tab" },
-      n = { ":tabnext<CR>", "Next Tab" },
-      c = { ":tabclose<CR>", "Close Tab" },
-      t = { ":tabnew", "New Tab" },
+      name = "Todo",
+      p = {
+        function()
+          require("todo-comments").jump_prev()
+        end,
+        "Previous Todo" },
+      n = {
+        function()
+          require("todo-comments").jump_next()
+        end,
+        "Next Todo" },
     }
   },
   J = {
@@ -72,6 +83,15 @@ wk.register({
   ["<C-d>"] = { "<C-d>zz", "Down half page and center" },
   n = { "nzzzv", "Next search result and center" },
   N = { "Nzzzv", "Previous search result and center" },
+  gr = {
+
+  }
+  -- K = {
+  --   function()
+  --     vim.lsp.buf.hover()
+  --   end,
+  --   "Hover Documentation"
+  -- }
 }, {
   mode = "n",
 })
@@ -103,7 +123,8 @@ wk.register({
   ["<leader>p"] = {
     mode = "x",
     "\"_dP",
-    "Paste over highlight without using register" },
+    "Paste over highlight without using register"
+  },
 }, {
   mode = "x"
 })

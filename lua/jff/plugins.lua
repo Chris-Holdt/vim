@@ -1,7 +1,7 @@
 return {
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.2',
+    tag = '0.1.5',
     dependencies = {
       'nvim-lua/plenary.nvim',
       "debugloop/telescope-undo.nvim",
@@ -111,7 +111,18 @@ return {
   },
   { "lewis6991/gitsigns.nvim" },
   {
-    "fatih/vim-go"
+    "ray-x/go.nvim",
+    dependencies = {
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("go").setup()
+    end,
+    event = { "CmdlineEnter" },
+    ft = { "go", 'gomod' },
+    build = ':lua require("go.install").update_all_sync()'
   },
   {
     "tpope/vim-dadbod",
@@ -181,5 +192,10 @@ return {
     dependencies = {
       "niuiic/core.nvim",
     }
+  },
+
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
   }
 }
