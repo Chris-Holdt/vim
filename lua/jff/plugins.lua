@@ -42,7 +42,18 @@ return {
       "nvim-lua/plenary.nvim",
     },
   },
-  { 'neovim/nvim-lspconfig' },
+  {
+    'neovim/nvim-lspconfig',
+    --[[ Will be available in the next release of neovim
+    opts = {
+      inlay_hints = {
+        enabled = true,
+        only_current_line = false,
+        prefix = ' » ',
+        highlight = 'Comment',
+      },
+    } ]]
+  },
   {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v2.x',
@@ -197,5 +208,8 @@ return {
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
+  },
+  {
+    "github/copilot.vim"
   }
 }
