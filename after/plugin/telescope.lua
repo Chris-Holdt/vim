@@ -2,8 +2,6 @@ local builtin = require('telescope.builtin')
 local actions = require('telescope.actions')
 local toggle_preview = require('telescope.actions.layout').toggle_preview
 
-require('telescope').load_extension('fzf')
-require('telescope').load_extension('undo')
 
 require('telescope').setup {
   defaults = {
@@ -64,6 +62,8 @@ require('telescope').setup {
 
 }
 
+-- require('telescope').load_extension('fzf')
+-- require('telescope').load_extension('undo')
 local wk = require("which-key")
 
 wk.register({

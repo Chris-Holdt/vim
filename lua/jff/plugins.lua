@@ -44,8 +44,8 @@ return {
   },
   {
     'neovim/nvim-lspconfig',
-    --[[ Will be available in the next release of neovim
-    opts = {
+    -- Will be available in the next release of neovim v.10
+    --[[ opts = {
       inlay_hints = {
         enabled = true,
         only_current_line = false,
@@ -54,44 +54,18 @@ return {
       },
     } ]]
   },
-  {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v2.x',
-    dependencies = {
-      -- LSP Support
-      { 'neovim/nvim-lspconfig' },
-      {
-        'williamboman/mason.nvim',
-        build = function()
-          pcall(vim.cmd, 'MasonUpdate')
-        end,
-      },
-      { 'williamboman/mason-lspconfig.nvim' },
-
-      -- Autocompletion
-      { 'hrsh7th/nvim-cmp' },
-      { 'hrsh7th/cmp-nvim-lsp' },
-      { 'hrsh7th/cmp-buffer' },
-      { 'hrsh7th/cmp-path' },
-      { 'hrsh7th/cmp-nvim-lsp' },
-      { 'hrsh7th/cmp-nvim-lua' },
-      { 'saadparwaiz1/cmp_luasnip' },
-
-      -- Snippets
-      { 'L3MON4D3/LuaSnip' },
-      { 'rafamadriz/friendly-snippets' },
-    }
-  },
+  { "williamboman/mason.nvim" },
+  { "williamboman/mason-lspconfig.nvim" },
+  {"hrsh7th/nvim-cmp"},
+  {"hrsh7th/cmp-nvim-lsp"},
+  {"hrsh7th/cmp-buffer"},
+  {"hrsh7th/cmp-path"},
+  {"saadparwaiz1/cmp_luasnip"},
+  {"L3MON4D3/LuaSnip"},
+  {"rafamadriz/friendly-snippets"},
   {
     "numToStr/Comment.nvim",
     lazy = false
-  },
-  {
-    "L3MON4D3/LuaSnip",
-    -- follow latest release.
-    version = "2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-    -- install jsregexp (optional!).
-    build = "make install_jsregexp"
   },
   {
     'windwp/nvim-autopairs',
@@ -198,13 +172,6 @@ return {
     },
     event = "VeryLazy"
   },
-  {
-    "niuiic/code-shot.nvim",
-    dependencies = {
-      "niuiic/core.nvim",
-    }
-  },
-
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
