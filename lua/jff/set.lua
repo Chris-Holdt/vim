@@ -29,8 +29,9 @@ vim.opt.cursorline = true                              -- Highlight the text lin
 vim.g.mapleader = " "                                  -- The leader key
 
 -- NETRW config
-vim.g.netrw_liststyle = 3 -- Use tree mode of netrw
-vim.g.netrw_banner = 0    -- Hide the banner
+vim.g.netrw_liststyle = 3                                -- Use tree mode of netrw
+vim.g.netrw_banner = 0                                   -- Hide the banner
+vim.g.netrw_bufsettings = 'noma nomod nu nobl nowrap ro' -- Set relative line numbers in netrw
 
 -- Folding options (UFO)
 vim.o.foldcolumn = "1"    -- Number of fold columns to display
