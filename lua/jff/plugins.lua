@@ -44,25 +44,16 @@ return {
   },
   {
     'neovim/nvim-lspconfig',
-    -- Will be available in the next release of neovim v.10
-    --[[ opts = {
-      inlay_hints = {
-        enabled = true,
-        only_current_line = false,
-        prefix = ' » ',
-        highlight = 'Comment',
-      },
-    } ]]
   },
   { "williamboman/mason.nvim" },
   { "williamboman/mason-lspconfig.nvim" },
-  {"hrsh7th/nvim-cmp"},
-  {"hrsh7th/cmp-nvim-lsp"},
-  {"hrsh7th/cmp-buffer"},
-  {"hrsh7th/cmp-path"},
-  {"saadparwaiz1/cmp_luasnip"},
-  {"L3MON4D3/LuaSnip"},
-  {"rafamadriz/friendly-snippets"},
+  { "hrsh7th/nvim-cmp" },
+  { "hrsh7th/cmp-nvim-lsp" },
+  { "hrsh7th/cmp-buffer" },
+  { "hrsh7th/cmp-path" },
+  { "saadparwaiz1/cmp_luasnip" },
+  { "L3MON4D3/LuaSnip" },
+  { "rafamadriz/friendly-snippets" },
   {
     "numToStr/Comment.nvim",
     lazy = false
@@ -103,7 +94,13 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
     config = function()
-      require("go").setup()
+      require("go").setup({
+        lsp_inlay_hints = {
+          enable = true,
+          style = "inlay",
+        },
+        lsp_cfg = true,
+      })
     end,
     event = { "CmdlineEnter" },
     ft = { "go", 'gomod' },
@@ -178,5 +175,16 @@ return {
   },
   {
     "github/copilot.vim"
+  },
+  {
+    "phpactor/phpactor"
+  },
+  {
+    "MysticalDevil/inlay-hints.nvim",
+    event = "LspAttach",
+    dependencies = { "neovim/nvim-lspconfig" },
+    config = function()
+      require("inlay-hints").setup()
+    end
   }
 }

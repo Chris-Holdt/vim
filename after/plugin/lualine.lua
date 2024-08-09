@@ -49,14 +49,23 @@ local function harpoon_file()
 
   local resp = {}
 
-  table.insert(resp, "⇁ ")
+  -- Only add harpoon marks if table has entries
+  if (#mark_table > 0)
+  then
+    table.insert(resp, "⇁")
+  end
+
   for k, v in pairs(mark_table) do
     local file = vim.fn.split(v['filename'], "/")
     file = file[#file]
     file = file == current_file and file .. "*" or file .. " "
     table.insert(resp, " " .. k .. " " .. file)
   end
-  table.insert(resp, " ↽")
+
+  if (#mark_table > 0)
+  then
+    table.insert(resp, " ↽")
+  end
 
   return table.concat(resp)
 end
@@ -70,9 +79,10 @@ require('lualine').setup({
   },
   sections = {
     lualine_a = { 'mode' },
-    lualine_b = { 'branch', 'diff', 'diagnostics', show_macro_recording },
+    lualine_b = { 'diagnostics', show_macro_recording },
     lualine_c = { 'filename', harpoon_file },
-    lualine_x = { 'fileformat', 'filetype', 'filesize' },
+    -- lualine_x = { 'fileformat', 'filetype', 'filesize' },
+    lualine_x = { 'fileformat', 'filetype' },
     lualine_y = { 'progress' },
     lualine_z = { 'location' }
   },
