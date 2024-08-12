@@ -7,6 +7,16 @@ return {
       "debugloop/telescope-undo.nvim",
     },
   },
+  {
+    'mfussenegger/nvim-dap',
+    dependencies = {
+      'theHamsta/nvim-dap-virtual-text',
+      'rcarriga/nvim-dap-ui',
+      'nvim-neotest/nvim-nio',
+      'nvim-telescope/telescope-dap.nvim',
+      'leoluz/nvim-dap-go',
+    },
+  },
   { "nvim-lua/plenary.nvim" },
   { "nvim-tree/nvim-web-devicons" },
   {

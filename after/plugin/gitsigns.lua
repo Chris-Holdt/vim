@@ -5,8 +5,9 @@ require('gitsigns').setup {
   current_line_blame = true
 }
 
-wk.register({
-  ["<leader>g"] = {
-    h = { "<cmd>Gitsigns toggle_linehl<CR>", "Toggle highlights" }
+wk.add(
+  {
+    { "<leader><leader>g",  group = "git",                     name = "Git" },
+    { "<leader><leader>gh", "<Cmd>Gitsigns toggle_linehl<CR>", group = "git", name = "Toggle highlights" }
   }
-})
+)

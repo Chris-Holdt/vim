@@ -1,8 +1,6 @@
 local wk = require("which-key")
 
-wk.register({
-  ["<leader>g"] = {
-    name = "Git",
-    g = { "<Cmd>LazyGit<CR>", "Open LazyGit" }
-  }
+wk.add({
+  { "<leader><leader>g",  group = "git",      name = "Git" },
+  { "<leader><leader>gg", "<Cmd>LazyGit<CR>", { group = "git", name = "Open LazyGit" } }
 })
