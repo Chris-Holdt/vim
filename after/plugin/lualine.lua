@@ -59,7 +59,16 @@ local function harpoon_file()
     local file = vim.fn.split(v['filename'], "/")
     file = file[#file]
     file = file == current_file and file .. "*" or file .. " "
-    table.insert(resp, " " .. k .. " " .. file)
+
+    local l_tbl = {
+      [1] = "y",
+      [2] = "u",
+      [3] = "i",
+      [4] = "o",
+      [5] = "p",
+    }
+
+    table.insert(resp, " " .. l_tbl[k] .. " " .. file)
   end
 
   if (#mark_table > 0)
