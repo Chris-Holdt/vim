@@ -1,5 +1,7 @@
 local wk = require('which-key')
 
+-- Disable LSP logging unless needed
+vim.lsp.set_log_level("off")
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('user_lsp_attach', { clear = true }),
@@ -27,12 +29,12 @@ local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 vim.filetype.add({ extension = { templ = "templ" } })
 
+require 'lspconfig'.cssls.setup {}
+
 -- Godot
 require 'lspconfig'.gdscript.setup {}
 -- Godot Shaders
 -- require'lspconfig'.gdshader_lsp.setup{}
-
-require 'lspconfig'.html.setup {}
 
 require 'lspconfig'.phpactor.setup {}
 
@@ -51,7 +53,7 @@ require('mason-lspconfig').setup({
     'templ',
     'htmx',
     'jsonls',
-    'tsserver',
+    'ts_ls',
   },
   handlers = {
     function(server_name)

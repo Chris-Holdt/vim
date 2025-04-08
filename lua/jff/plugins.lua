@@ -1,12 +1,15 @@
 return {
+  -- UI
   {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.5',
     dependencies = {
       'nvim-lua/plenary.nvim',
       "debugloop/telescope-undo.nvim",
+      "nvim-telescope/telescope-live-grep-args.nvim",
     },
   },
+  -- Debugging
   {
     'mfussenegger/nvim-dap',
     dependencies = {
@@ -17,6 +20,7 @@ return {
       'leoluz/nvim-dap-go',
     },
   },
+  -- Plugin dependency
   { "nvim-lua/plenary.nvim" },
   { "nvim-tree/nvim-web-devicons" },
   {
@@ -43,8 +47,10 @@ return {
       "nvim-tree/nvim-web-devicons"
     },
   },
+  -- Colourscheme
   { "catppuccin/nvim",     name = "catppuccin", priority = 1000 },
   { "ThePrimeagen/harpoon" },
+  -- Plugin manager
   {
     "kdheepak/lazygit.nvim",
     -- optional for floating window border decoration
@@ -52,6 +58,7 @@ return {
       "nvim-lua/plenary.nvim",
     },
   },
+  -- LSP
   {
     'neovim/nvim-lspconfig',
   },
@@ -64,28 +71,34 @@ return {
   { "saadparwaiz1/cmp_luasnip" },
   { "L3MON4D3/LuaSnip" },
   { "rafamadriz/friendly-snippets" },
+  -- Quick commenting
   {
     "numToStr/Comment.nvim",
     lazy = false
   },
+  -- Autopairing of brackets etc
   {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
     opts = {}
   },
+  -- Quick surrounding of text
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
   },
+  -- Show errors quickly
   {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {},
   },
+  -- Bottom statusline
   {
     "nvim-lualine/lualine.nvim"
   },
+  -- Helpful keymap display
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -95,7 +108,9 @@ return {
     end,
     opts = {}
   },
+  -- Show git signs in gutter
   { "lewis6991/gitsigns.nvim" },
+  -- Golang support
   {
     "ray-x/go.nvim",
     dependencies = {
@@ -116,32 +131,9 @@ return {
     ft = { "go", 'gomod' },
     build = ':lua require("go.install").update_all_sync()'
   },
-  {
-    "tpope/vim-dadbod",
-    opt = true,
-    requires = {
-      "kristijanhusak/vim-dadbod-ui",
-      "kristijanhusak/vim-dadbod-completion"
-    },
-  },
-  {
-    "kristijanhusak/vim-dadbod-ui",
-    dependencies = {
-      {
-        "tpope/vim-dadbod",
-        lazy = true
-      },
-      {
-        "kristijanhusak/vim-dadbod-completion",
-        ft = { "sql", "plsql" },
-        lazy = true,
-      }
-    }
-  },
-  {
-    "kristijanhusak/vim-dadbod-completion"
-  },
-  {
+  -- Make things look cool
+  -- Temporarily disabled
+  --[[ {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {},
@@ -149,29 +141,35 @@ return {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
     }
-  },
+  }, ]]
+  -- Hovery dialogs for LSP etc
   {
     "lewis6991/hover.nvim",
   },
+  -- Background highlighting of RGB, HEX, colour names etc
   {
     "brenoprata10/nvim-highlight-colors"
   },
+  -- Enhanced jumping
   {
     "folke/flash.nvim",
     event = "VeryLazy",
     opts = {},
   },
+  -- Folding
   {
     "kevinhwang91/nvim-ufo",
     dependencies = {
       "kevinhwang91/promise-async"
     }
   },
+  -- Indent guides
   {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     opts = {}
   },
+  -- Rainbow brackets etc
   {
     "HiPhish/rainbow-delimiters.nvim",
     dependencies = {
@@ -179,16 +177,20 @@ return {
     },
     event = "VeryLazy"
   },
+  -- Highlight TODO comments
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
   },
+  -- Less repetition using AI
   {
     "github/copilot.vim"
   },
+  -- PHP support
   {
     "phpactor/phpactor"
   },
+  -- Inlay hints woo
   {
     "MysticalDevil/inlay-hints.nvim",
     event = "LspAttach",
@@ -196,5 +198,70 @@ return {
     config = function()
       require("inlay-hints").setup()
     end
+  },
+  -- Formatters
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        templ = { "templ" },
+      },
+    },
+  },
+  -- Quickly jump buffers
+  {
+    "leath-dub/snipe.nvim",
+    config = function() -- Configuring in sepearate file not currently working
+      require("snipe").setup({
+        ui = {
+          position = "cursor",
+          open_win_override = {
+            border = "rounded"
+          }
+        },
+        sort = "last"
+      })
+    end,
+    opts = {}
+  },
+  -- Automatically save and load sessions, no thinking required
+  {
+    'rmagatti/auto-session',
+    lazy = false,
+
+    ---enables autocomplete for opts
+    ---@module "auto-session"
+    ---@type AutoSession.Config
+    opts = {
+      suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+      -- log_level = 'debug',
+    }
+  },
+  -- Make life harder, to make me faster
+  {
+    "m4xshen/hardtime.nvim",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    opts = {}
+  },
+  -- Shhhh Emacs Org mode
+  {
+    'nvim-orgmode/orgmode',
+    event = 'VeryLazy',
+    ft = { 'org' },
+  },
+  {
+    'akinsho/org-bullets.nvim',
+    config = function()
+      require("org-bullets").setup()
+    end
+  },
+  {
+    "nvim-orgmode/telescope-orgmode.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "nvim-orgmode/orgmode",
+      "nvim-telescope/telescope.nvim",
+    },
   }
+
 }

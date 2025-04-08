@@ -1,133 +1,63 @@
 local wk = require("which-key")
 
-wk.register({
-  ["<C-h>"] = { "<C-w>h", "Move to split on left" },
-  ["<C-j>"] = { "<C-w>j", "Move to split below" },
-  ["<C-k>"] = { "<C-w>k", "Move to split above" },
-  ["<C-l>"] = { "<C-w>l", "Move to split on right" },
-  ["<C-Left>"] = { "<CMD>vertical resize -2<CR>", "Resize split left" },
-  ["<C-Right>"] = { "<CMD>vertical resize +2<CR>", "Resize split right" },
-  ["<leader>"] = {
-    e = {
-      name = "Window setup",
-      s = { "<C-w>h<C-w>h<C-w>=26<C-w><<C-w>l<C-w>l26<C-w><<C-w>h", "Big center, smaller left and right" },
-      e = { "<C-w>v<C-w>v<C-w>h<C-w>h<C-w>=26<C-w><<C-w>l<C-w>l26<C-w><<C-w>h", "Open and Big center" }
-    },
-    b = {
-      name = "Buffers",
-      d = {
-        name = "Delete buffer/s",
-        c = { ":bd<CR>", "Close the current buffer" },
-        o = { ":%bd|e#<CR>", "Close all buffers except this one" },
-      }
-    },
-    c = {
-      name = "Colourscheme quick switch",
-      d = {
-        ":colorscheme catppuccin-latte <CR>",
-        "Day mode: Catppuccin Latte"
-      },
-      n = { ":colorscheme spacerain <CR>", "Night mode: Spacerain" },
-    },
-    d = {
-      name = "Database",
-      b = {
-        "<CMD>DBUIToggle<CR>",
-        "Open Dadbod UI"
-      }
-    },
-    s = {
-      function()
-        require("code-shot").shot()
-      end,
-      "Screenshot"
-    },
-    p = {
-      name = "File commands",
-      v = { vim.cmd.Ex, "Open explorer" },
-      f = {
-        function()
-          vim.lsp.buf.format()
-        end,
-        "Format file"
-      },
-    },
-    w = {
+wk.add(
+  {
+    { "<A-j>",       ":cnext<CR>",                                                       desc = "Quick fix next" },
+    { "<A-k>",       ":cprevious<CR>",                                                   desc = "Quick fix previous" },
+    { "<C-Left>",    "<CMD>vertical resize -2<CR>",                                      desc = "Resize split left" },
+    { "<C-Right>",   "<CMD>vertical resize +2<CR>",                                      desc = "Resize split right" },
+    { "<C-d>",       "<C-d>zz",                                                          desc = "Down half page and center" },
+    { "<C-h>",       "<C-w>h",                                                           desc = "Move to split on left" },
+    { "<C-j>",       "<C-w>j",                                                           desc = "Move to split below" },
+    { "<C-k>",       "<C-w>k",                                                           desc = "Move to split above" },
+    { "<C-l>",       "<C-w>l",                                                           desc = "Move to split on right" },
+    { "<C-u>",       "<C-u>zz",                                                          desc = "Up half page and center" },
+    { "<leader>b",   group = "Buffers" },
+    { "<leader>bd",  group = "Delete buffer/s" },
+    { "<leader>bdc", ":bd<CR>",                                                          desc = "Close the current buffer" },
+    { "<leader>bdo", ":%bd|e#<CR>",                                                      desc = "Close all buffers except this one" },
+    { "<leader>c",   group = "Colourscheme quick switch" },
+    { "<leader>cd",  ":colorscheme catppuccin-latte <CR>",                               desc = "Day mode: Catppuccin Latte" },
+    { "<leader>cn",  ":colorscheme spacerain <CR>",                                      desc = "Night mode: Spacerain" },
+    { "<leader>cc",  ":colorscheme catppuccin-macchiato <CR>",                           desc = "Night mode: Catppuccin Macchiato" },
+    --[[ { "<leader>d",   group = "Database" },
+    { "<leader>db",  "<CMD>DBUIToggle<CR>",                                              desc = "Open Dadbod UI" }, ]]
+    { "<leader>e",   group = "Window setup" },
+    { "<leader>ee",  "<C-w>v<C-w>v<C-w>h<C-w>h<C-w>=26<C-w><<C-w>l<C-w>l26<C-w><<C-w>h", desc = "Open and Big center" },
+    { "<leader>es",  "<C-w>h<C-w>h<C-w>=26<C-w><<C-w>l<C-w>l26<C-w><<C-w>h",             desc = "Big center, smaller left and right" },
+    { "<leader>p",   group = "File commands" },
+    { "<leader>pf",  function() vim.lsp.buf.format() end,                                desc = "Format file" },
+    { "<leader>pv",  vim.cmd.Ex,                                                         desc = "Open explorer" },
+    { "<leader>t",   group = "Todo" },
+    { "<leader>tn",  function() require("todo-comments").jump_next() end,                desc = "Next Todo" },
+    { "<leader>tp",  function() require("todo-comments").jump_prev() end,                desc = "Previous Todo" },
+    {
+      "<leader>w",
       function()
         vim.lsp.buf.format()
         vim.cmd("w")
       end,
-      "Format and save"
+      desc = "Format and save"
     },
-    t = {
-      name = "Todo",
-      p = {
-        function()
-          require("todo-comments").jump_prev()
-        end,
-        "Previous Todo" },
-      n = {
-        function()
-          require("todo-comments").jump_next()
-        end,
-        "Next Todo" },
-    }
-  },
-  J = {
-    "mzJ z",
-    "Append line below to the end of current, maintain cursor pos"
-  },
-  ["<A-k>"] = { ":m .-2<CR>==", "Move highlight up" },
-  ["<A-j>"] = { ":m .+1<CR>==", "Move highlight down" },
-  ["<C-u>"] = { "<C-u>zz", "Up half page and center" },
-  ["<C-d>"] = { "<C-d>zz", "Down half page and center" },
-  n = { "nzzzv", "Next search result and center" },
-  N = { "Nzzzv", "Previous search result and center" },
-  gr = {
+    { "J",                  "mzJ z",              desc = "Append line below to the end of current, maintain cursor pos" },
+    { "N",                  "Nzzzv",              desc = "Previous search result and center" },
+    { "n",                  "nzzzv",              desc = "Next search result and center" },
+    { "<leader>s",          ":SessionSearch<CR>", desc = "Open Session picker" },
 
-  }
-  -- K = {
-  --   function()
-  --     vim.lsp.buf.hover()
-  --   end,
-  --   "Hover Documentation"
-  -- }
-}, {
-  mode = "n",
-})
+    { "<leader>y",          '"+y',                desc = "Copy to system clipboard",                                    mode = { "v", "n", "x" } },
 
-wk.register({
-  name = "Screenshot",
-  ["<leader>s"] = {
-    mode = "v",
-    function()
-      require("code-shot").shot()
-    end,
-    "Take a Screenshot of the current selection"
-  },
-  {
-    mode = "v",
-  }
-})
+    { "<leader>Y",          '"+yg_',              desc = "Copy to system clipboard without newline",                    mode = { "v", "n", "x" } },
+    --[[ { "<A-k>",              "<-2<CR>gv=gv",       desc = "Move highlight up",                                           mode = { "v", "n", "x" } },
+    { "<A-j>",              ">+1<CR>gv=gv",       desc = "Move highlight down",                                         mode = { "v", "n", "x" } }, ]]
 
-wk.register({
-  name = "Highlight moving",
-  ["<A-k>"] = { "<-2<CR>gv=gv", "Move highlight up" },
-  ["<A-j>"] = { ">+1<CR>gv=gv", "Move highlight down" },
-}, {
-  mode = "v",
-})
-
-wk.register({
-  name = "Paste over",
-  ["<leader>p"] = {
-    mode = "x",
-    "\"_dP",
-    "Paste over highlight without using register"
-  },
-}, {
-  mode = "x"
-})
+    { "<leader>p",          "\"_dP",              desc = "Paste over highlight without using register",                 mode = { "x" } },
+    { "<leader><leader>t",  desc = "Tabs" },
+    { "<leader><leader>tn", "<C-w>T",             desc = "Move buffer to new tab" },
+    { "<leader><leader>tq", ":tabc<CR>",          desc = "Close current tab" },
+    --[[ { "<leader><leader>q",  desc = "Quick Fix" },
+    { "<leader><leader>qn", ":cnext<CR>",          desc = "Next quick fix item" },
+    { "<leader><leader>qp", ":cprevious<CR>",          desc = "Previous quick fix item" }, ]]
+  })
 
 vim.keymap.set("n", "Q", "<nop>")
 

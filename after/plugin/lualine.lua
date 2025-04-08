@@ -79,6 +79,25 @@ local function harpoon_file()
   return table.concat(resp)
 end
 
+local function short_mode()
+  local mode = vim.fn.mode()
+  local mode_map = {
+    n = "N",
+    i = "I",
+    c = "C",
+    V = "V",
+    [""] = "V-B",
+    v = "V",
+    R = "R",
+    s = "S",
+    S = "S-L",
+    [""] = "S-B",
+    t = "T",
+  }
+
+  return mode_map[mode]
+end
+
 
 
 require('lualine').setup({
@@ -87,7 +106,7 @@ require('lualine').setup({
     section_separators = { left = '', right = '' },
   },
   sections = {
-    lualine_a = { 'mode' },
+    lualine_a = { short_mode },
     lualine_b = { 'diagnostics', show_macro_recording },
     lualine_c = { 'filename', harpoon_file },
     -- lualine_x = { 'fileformat', 'filetype', 'filesize' },

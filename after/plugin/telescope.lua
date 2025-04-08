@@ -1,6 +1,7 @@
 local builtin = require('telescope.builtin')
 local actions = require('telescope.actions')
 local toggle_preview = require('telescope.actions.layout').toggle_preview
+local extensions = require('telescope').extensions
 
 
 require('telescope').setup {
@@ -9,7 +10,7 @@ require('telescope').setup {
 
     preview = {
       hide_on_startup = false,
-      file_ignore_patters = { ".git/", "node_modules" },
+      file_ignore_patterns = { ".git/", "node_modules", "*_templ.go" },
     },
 
     layout_config = {
@@ -62,38 +63,45 @@ require('telescope').setup {
 
 }
 
--- require('telescope').load_extension('fzf')
+require('telescope').load_extension('fzf')
+require('telescope').load_extension('live_grep_args')
 -- require('telescope').load_extension('undo')
 local wk = require("which-key")
 
-wk.register({
-  ["<leader>"] = {
-    u = { "<Cmd> Telescope undo theme=dropdown<CR>", "Show undo tree" },
-    f = {
-      name = "Telescopy",
-      k = { builtin.keymaps, "List keymaps" },
-      p = { builtin.find_files, "List local project files" },
-      o = { builtin.oldfiles, "List previosuly open files" },
-      g = { builtin.git_files, "List git project files, ignores files in gitignore" },
-      s = { builtin.live_grep, "Grep search in files" },
-      c = { builtin.grep_string, "Grep search for string under cursor in CWD" },
-      b = { builtin.buffers, "List open buffers" },
-      l = { builtin.lsp_references, "LSP References, lists defs and uses" },
-      d = { builtin.diagnostics, "Show diagnostics" },
-      q = { builtin.quickfix, "Show quickfix items" },
-      r = { builtin.registers, "Show registers" },
-      f = { builtin.current_buffer_fuzzy_find, "Fuzzy find across the current buffer" },
-      m = { ":make!<CR>:Telescope quickfix<CR>", "Run make and show quickfix list" },
-      t = { ":TodoTelescope<CR>", "List Todos" },
-      ["<CR>"] = { builtin.resume, "Resume last search" }
-    }
-  },
-  gr = {
-    builtin.lsp_references,
-    "[G]oto [R]eference",
-  },
-  gd = {
-    builtin.lsp_definitions,
-    "[G]oto [D]efinitions",
+-- local symbols = "<cmd>:Telescope lsp_document_symbols theme=dropdown symbols={'function', 'method'}<CR>"
+local function showSymbols()
+  local opts = {
+    symbols = { "function", "method" },
+    symbol_width = 80,
+    layout_config = {
+      height = 0.8,
+      width = 0.9,
+    },
   }
+  local theme = require("telescope.themes").get_ivy(opts)
+
+  builtin.lsp_document_symbols(theme)
+end
+
+wk.add({
+  { "<leader>f",     group = "Telescopy" },
+  { "<leader>f<CR>", builtin.resume,                            desc = "Resume last search" },
+  { "<leader>fb",    builtin.buffers,                           desc = "List open buffers" },
+  { "<leader>fc",    builtin.grep_string,                       desc = "Grep search for string under cursor in CWD" },
+  { "<leader>fd",    builtin.diagnostics,                       desc = "Show diagnostics" },
+  { "<leader>ff",    builtin.current_buffer_fuzzy_find,         desc = "Fuzzy find across the current buffer" },
+  { "<leader>fg",    builtin.git_files,                         desc = "List git project files, ignores files in gitignore" },
+  { "<leader>fk",    builtin.keymaps,                           desc = "List keymaps" },
+  { "<leader>fl",    builtin.lsp_references,                    desc = "LSP References, lists defs and uses" },
+  { "<leader>fm",    ":make!<CR>:Telescope quickfix<CR>",       desc = "Run make and show quickfix list" },
+  { "<leader>fo",    builtin.oldfiles,                          desc = "List previosuly open files" },
+  { "<leader>fp",    builtin.find_files,                        desc = "List local project files" },
+  { "<leader>fq",    builtin.quickfix,                          desc = "Show quickfix items" },
+  { "<leader>fr",    builtin.registers,                         desc = "Show registers" },
+  { "<leader>fj",    showSymbols,                               desc = "Show Symbols" },
+  { "<leader>fs",    extensions.live_grep_args.live_grep_args,  desc = "Grep search in files" },
+  { "<leader>ft",    ":TodoTelescope<CR>",                      desc = "List Todos" },
+  { "<leader>u",     "<Cmd> Telescope undo theme=dropdown<CR>", desc = "Show undo tree" },
+  { "gd",            builtin.lsp_definitions,                   desc = "[G]oto [D]efinitions" },
+  { "gr",            builtin.lsp_references,                    desc = "[G]oto [R]eference" },
 })

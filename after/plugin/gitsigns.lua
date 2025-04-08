@@ -7,7 +7,6 @@ require('gitsigns').setup {
 
 wk.add(
   {
-    { "<leader><leader>g",  group = "git",                     name = "Git" },
     { "<leader><leader>gh", "<Cmd>Gitsigns toggle_linehl<CR>", group = "git", name = "Toggle highlights" }
   }
 )

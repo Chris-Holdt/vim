@@ -12,19 +12,7 @@ hover.setup {
   title = true
 }
 
-wk.register({
-  name = "Hover",
-  K = {
-    function()
-      hover.hover()
-    end,
-    "Hover"
-  },
-  gK = {
-    function()
-      hover.hover_select()
-    end,
-    "Hover Select"
-  },
-  mode = "n"
+wk.add({
+  { "K",  function() hover.hover() end,        desc = "Hover" },
+  { "gK", function() hover.hover_select() end, desc = "Hover Select" },
 })

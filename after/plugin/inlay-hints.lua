@@ -16,21 +16,12 @@ end
 
 local wk = require("which-key")
 
-wk.register({
-  ["<leader>p"] = {
-    name = "Inlay Hints",
-    t = { toggle_inlay, "Toggle Inlay Hints" },
-    e = { enable, "Enable Inlay Hints" },
-    d = { disable, "Disable Inlay Hints" },
-  },
+wk.add({
+  { "<leader>pd", disable,      desc = "Disable Inlay Hints" },
+  { "<leader>pe", enable,       desc = "Enable Inlay Hints" },
+  { "<leader>pt", toggle_inlay, desc = "Toggle Inlay Hints" },
+
 })
-
--- require("inlay-hints").setup({
---[[ commands = { enable = true }, -- Enable InlayHints commands, include `InlayHintsToggle`, `InlayHintsEnable` and `InlayHintsDisable`
-  autocmd = { enable = true }   -- Enable the inlay hints on `LspAttach` event ]]
--- })
-
--- require("inlay-hints").on_attach(client, bufnr)
 
 require("lspconfig").lua_ls.setup({
   settings = {
@@ -62,7 +53,7 @@ require("lspconfig").gopls.setup({
   }
 })
 
-require("lspconfig").tsserver.setup({
+require("lspconfig").ts_ls.setup({
   settings = {
     typescript = {
       inlayHints = {
@@ -165,3 +156,8 @@ require("lspconfig").csharp_ls.setup({
     },
   }
 }) ]]
+
+
+require("lspconfig").htmx.setup({
+  filetypes = { "templ" },
+})

@@ -29,8 +29,8 @@ vim.opt.cursorline = true                              -- Highlight the text lin
 vim.g.mapleader = " "                                  -- The leader key
 
 -- NETRW config
-vim.g.netrw_liststyle = 3 -- Use tree mode of netrw
-vim.g.netrw_banner = 0    -- Hide the banner
+vim.g.netrw_liststyle = 3                                -- Use tree mode of netrw
+vim.g.netrw_banner = 0                                   -- Hide the banner
 vim.g.netrw_bufsettings = 'noma nomod nu nobl nowrap ro' -- Set relative line
 
 -- Folding options (UFO)
@@ -39,3 +39,6 @@ vim.o.foldlevel = 99      -- Folds with higherr level will be closed
 vim.o.foldlevelstart = 99 -- Sets foldlevel when starting to edit another buffer in a window
 vim.o.foldenable = true   -- All folds are closed
 vim.o.fillchars = [[foldopen:,foldclose:]]
+
+-- Session opts (auto-sesison)
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"

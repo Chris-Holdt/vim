@@ -1,21 +1,19 @@
 local wk = require("which-key")
 
-require('aerial').setup({
+require("aerial").setup({
   -- optionally use on_attach to set keymaps when aerial has attached to a buffer
   on_attach = function(bufnr)
     -- Jump forwards/backwards with '{' and '}'
-    vim.keymap.set('n', '{', '<cmd>AerialPrev<CR>', { buffer = bufnr })
-    vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', { buffer = bufnr })
-
-    layout = {
-      max_width = 60,
-      min_width = 30
-    }
-  end
+    vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+    wk.add({
+      { "{", desc = "Aerial Previous" },
+      { "}", desc = "Aerial Next" },
+    })
+  end,
 })
 
-wk.register({
-  ["<leader>a"] = {
-    name = "Aerial",
-    t = { "<cmd>AerialToggle!<CR>", "Toggle Aerial Symbol outline" } }
+wk.add({
+  { "<leader>a", group = "Aerial" },
+  { "<leader>a", "<cmd>AerialToggle!<CR>", desc = "Toggle Aerial Symbol outline" },
 })
