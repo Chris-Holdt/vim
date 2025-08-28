@@ -38,6 +38,7 @@ return {
     build =
     'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
   },
+  -- File outline (e.g function/method names)
   {
     'stevearc/aerial.nvim',
     opts = {},
@@ -48,8 +49,14 @@ return {
     },
   },
   -- Colourscheme
-  { "catppuccin/nvim",     name = "catppuccin", priority = 1000 },
-  { "ThePrimeagen/harpoon" },
+  { "catppuccin/nvim",                  name = "catppuccin", priority = 1000 },
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = {
+      "nvim-lua/plenary.nvim"
+    },
+  },
   -- Plugin manager
   {
     "kdheepak/lazygit.nvim",
@@ -143,26 +150,33 @@ return {
     }
   }, ]]
   -- Hovery dialogs for LSP etc
-  {
+  --[[ {
     "lewis6991/hover.nvim",
+  }, ]]
+  {
+    "nvimdev/lspsaga.nvim",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    }
   },
   -- Background highlighting of RGB, HEX, colour names etc
   {
     "brenoprata10/nvim-highlight-colors"
   },
   -- Enhanced jumping
-  {
+  --[[ {
     "folke/flash.nvim",
     event = "VeryLazy",
     opts = {},
-  },
+  }, ]]
   -- Folding
-  {
+  --[[ {
     "kevinhwang91/nvim-ufo",
     dependencies = {
       "kevinhwang91/promise-async"
     }
-  },
+  }, ]]
   -- Indent guides
   {
     "lukas-reineke/indent-blankline.nvim",
@@ -209,7 +223,7 @@ return {
     },
   },
   -- Quickly jump buffers
-  {
+  --[[ {
     "leath-dub/snipe.nvim",
     config = function() -- Configuring in sepearate file not currently working
       require("snipe").setup({
@@ -223,7 +237,7 @@ return {
       })
     end,
     opts = {}
-  },
+  }, ]]
   -- Automatically save and load sessions, no thinking required
   {
     'rmagatti/auto-session',
@@ -244,24 +258,89 @@ return {
     opts = {}
   },
   -- Shhhh Emacs Org mode
-  {
+  --[[ {
     'nvim-orgmode/orgmode',
     event = 'VeryLazy',
     ft = { 'org' },
-  },
-  {
+  }, ]]
+  --[[ {
     'akinsho/org-bullets.nvim',
     config = function()
       require("org-bullets").setup()
     end
-  },
-  {
+  }, ]]
+  --[[ {
     "nvim-orgmode/telescope-orgmode.nvim",
     event = "VeryLazy",
     dependencies = {
       "nvim-orgmode/orgmode",
       "nvim-telescope/telescope.nvim",
     },
+  }, ]]
+  {
+    "zaldih/themery.nvim",
+    lazy = false,
+    config = function()
+      require("themery").setup({
+        -- add the config here
+      })
+    end
+  },
+  -- ================================== COLOR SCHEMES ==================================
+  {
+    "tomasr/molokai",
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    "joshdick/onedark.vim",
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    "sainnhe/everforest",
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    "sainnhe/sonokai",
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    "AlexvZyl/nordic.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('nordic').load()
+    end
+  },
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    config = function()
+      vim.cmd("colorscheme rose-pine")
+    end
+  },
+  {
+    "scottmckendry/cyberdream.nvim",
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    "morhetz/gruvbox",
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = false,
+    priority = 1000,
   }
-
 }

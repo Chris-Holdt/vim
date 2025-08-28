@@ -22,9 +22,12 @@ wk.add(
     { "<leader>cc",  ":colorscheme catppuccin-macchiato <CR>",                           desc = "Night mode: Catppuccin Macchiato" },
     --[[ { "<leader>d",   group = "Database" },
     { "<leader>db",  "<CMD>DBUIToggle<CR>",                                              desc = "Open Dadbod UI" }, ]]
+
     { "<leader>e",   group = "Window setup" },
-    { "<leader>ee",  "<C-w>v<C-w>v<C-w>h<C-w>h<C-w>=26<C-w><<C-w>l<C-w>l26<C-w><<C-w>h", desc = "Open and Big center" },
+    { "<leader>ee",  "<C-w>=",                                                           desc = "Equalise" },
+    { "<leader>eb",  "<C-w>v<C-w>v<C-w>h<C-w>h<C-w>=26<C-w><<C-w>l<C-w>l26<C-w><<C-w>h", desc = "Open and Big center" },
     { "<leader>es",  "<C-w>h<C-w>h<C-w>=26<C-w><<C-w>l<C-w>l26<C-w><<C-w>h",             desc = "Big center, smaller left and right" },
+
     { "<leader>p",   group = "File commands" },
     { "<leader>pf",  function() vim.lsp.buf.format() end,                                desc = "Format file" },
     { "<leader>pv",  vim.cmd.Ex,                                                         desc = "Open explorer" },

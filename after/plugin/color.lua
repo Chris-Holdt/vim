@@ -4,4 +4,5 @@ function MakePrettyColours(colour)
   vim.cmd.colorscheme(colour)
 end
 
-MakePrettyColours()
+-- Using Themery now, this isn't needed right now
+-- MakePrettyColours()

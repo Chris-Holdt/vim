@@ -89,6 +89,8 @@ require('mason-lspconfig').setup({
       require('lspconfig').gopls.setup({
         settings = {
           gopls = {
+            watchFileChanges = true,
+            watchDirectory = true,
             hints = {
               rangeVariableTypes = true,
               parameterNames = true,

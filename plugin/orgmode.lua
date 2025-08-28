@@ -1,4 +1,4 @@
--- Orgmode config
+--[[ -- Orgmode config
 require('orgmode').setup({
   org_agenda_files = '~/orgfiles/**/*',
   org_default_notes_file = '~/orgfiles/refile.org',
@@ -27,4 +27,4 @@ wk.add({
   { "<leader>oo", refile_heading,   desc = "Refile heading",  mode = "n" },
   { "<leader>oh", search_headings,  desc = "Search headings", mode = "n" },
   { "<leader>ol", insert_link,      desc = "Insert link",     mode = "n" },
-})
+}) ]]
