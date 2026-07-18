@@ -11,7 +11,7 @@ require("aerial").setup({
       { "}", desc = "Aerial Next" },
     })
 
-    -- Attempts to have relative line numbers in the aerial window on open
+
     -- vim.api.nvim_set_option_value("relativenumber", true, { buf = bufnr })
     -- vim.opt_local.set(bufnr, { relativenumber = true })
 

@@ -1,8 +1,7 @@
 function MakePrettyColours(colour)
-  -- colour = colour or "spacerain"
-  colour = colour or "catppuccin-macchiato"
+  colour = colour or "sonokai"
   vim.cmd.colorscheme(colour)
 end
 
--- Using Themery now, this isn't needed right now
--- MakePrettyColours()
+-- Default fallback; Themery will override with its saved theme when it runs
+MakePrettyColours()

@@ -22,6 +22,11 @@ vim.opt.scrolloff = 8                                  -- Minimal number of scre
 vim.opt.signcolumn = "yes"                             -- Always draw the signcolumn
 
 vim.opt.updatetime = 50                                -- Swap file write time after inactivity
+vim.opt.autoread = true                                -- Reload files changed outside of Neovim
+
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+  command = "checktime",
+})
 
 vim.opt.colorcolumn = "80"                             -- A comma separated list of screen columns that are highlighted
 vim.opt.cursorline = true                              -- Highlight the text line of the cursor

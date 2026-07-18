@@ -29,10 +29,10 @@ end
 vim.api.nvim_create_autocmd({ "BufWritePre" }, { pattern = { "*.templ" }, callback = custom_format })
 
 
-require("lspconfig").templ.setup {
+vim.lsp.config('templ', {
   on_attach = function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
     -- other configuration options
     vim.keymap.set("n", "<leader>lf", custom_format, opts)
   end
-}
+})

@@ -1,23 +1,15 @@
-local wk = require('which-key')
-
 -- Disable LSP logging unless needed
-vim.lsp.set_log_level("off")
+vim.lsp.log.set_level("off")
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('user_lsp_attach', { clear = true }),
   callback = function(event)
     local opts = { buffer = event.buf }
 
-    --[[ wk.register({
-      [""] = { "<cmd><cr>" },
-    }) ]]
-
     vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)
     vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
     vim.keymap.set('n', '<leader>vws', function() vim.lsp.buf.workspace_symbol() end, opts)
     vim.keymap.set('n', '<leader>vd', function() vim.diagnostic.open_float() end, opts)
-    vim.keymap.set('n', '[d', function() vim.diagnostic.goto_next() end, opts)
-    vim.keymap.set('n', ']d', function() vim.diagnostic.goto_prev() end, opts)
     vim.keymap.set('n', '<leader>vca', function() vim.lsp.buf.code_action() end, opts)
     vim.keymap.set('n', '<leader>vrr', function() vim.lsp.buf.references() end, opts)
     vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end, opts)
@@ -29,22 +21,22 @@ local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 vim.filetype.add({ extension = { templ = "templ" } })
 
-require 'lspconfig'.cssls.setup {}
+vim.lsp.config("cssls", {})
 
 -- Godot
-require 'lspconfig'.gdscript.setup {}
+vim.lsp.config("gdscript", {})
 -- Godot Shaders
 -- require'lspconfig'.gdshader_lsp.setup{}
 
-require 'lspconfig'.phpactor.setup {}
+vim.lsp.config("phpactor", {})
 
-require 'lspconfig'.htmx.setup {}
+vim.lsp.config("htmx", {})
 
-require 'lspconfig'.tailwindcss.setup({
+vim.lsp.config("tailwindcss", {
   init_options = { userLanguages = { templ = "html" } },
 })
 
-require 'lspconfig'.templ.setup {}
+vim.lsp.config("templ", {})
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
@@ -59,7 +51,6 @@ require('mason-lspconfig').setup({
     function(server_name)
       require('lspconfig')[server_name].setup({
         capabilities = lsp_capabilities,
-        enable_inlay_hints = true,
       })
     end,
     lua_ls = function()
@@ -67,45 +58,22 @@ require('mason-lspconfig').setup({
         capabilities = lsp_capabilities,
         settings = {
           Lua = {
-            hint = {
-              enable = true,
-            },
-            runtime = {
-              version = 'LuaJIT'
-            },
+            hint = { enable = true },
+            runtime = { version = 'LuaJIT' },
             diagnostics = {
-              globals = { 'vim' },
+              globals = { 'vim', 'Snacks' },
             },
             workspace = {
-              library = {
-                vim.env.VIMRUNTIME,
-              }
+              library = { vim.env.VIMRUNTIME },
             }
           }
         }
       })
     end,
-    gopls = function()
-      require('lspconfig').gopls.setup({
-        settings = {
-          gopls = {
-            watchFileChanges = true,
-            watchDirectory = true,
-            hints = {
-              rangeVariableTypes = true,
-              parameterNames = true,
-              constantValues = true,
-              assignVariableTypes = true,
-              compositeLiteralFields = true,
-              compositeLiteralTypes = true,
-              functionTypeParameters = true,
-            },
-          }
-        }
+    csharp_ls = function()
+      require('lspconfig').csharp_ls.setup({
+        capabilities = lsp_capabilities,
       })
-    end,
-    csharp = function()
-      require('lspconfig').csharp_ls.setup {}
     end,
   }
 })
@@ -189,7 +157,7 @@ lsp.setup() ]]
        path = vim.split(package.path, ';'),
      },
      diagnostics = {
-       globals = { 'vim' },
+       globals = { 'vim', 'Snacks' },
      },
      workspace = {
        library = {

@@ -1,6 +1,8 @@
-if not vim.lsp.inlay_hint.is_enabled() then
-  vim.lsp.inlay_hint.enable(true)
-end
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(ev)
+    vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
+  end,
+})
 
 local toggle_inlay = function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
@@ -23,21 +25,7 @@ wk.add({
 
 })
 
-require("lspconfig").lua_ls.setup({
-  settings = {
-    Lua = {
-      diagnostics = {
-        enable = true,
-        globals = { "vim", "use" },
-      },
-      hint = {
-        enable = true
-      }
-    }
-  }
-})
-
---[[ require("lspconfig").gopls.setup({
+vim.lsp.config('gopls', {
   settings = {
     gopls = {
       hints = {
@@ -51,38 +39,23 @@ require("lspconfig").lua_ls.setup({
       },
     }
   }
-}) ]]
+})
 
--- require("lspconfig").ts_ls.setup({
---   settings = {
---     typescript = {
---       inlayHints = {
---         includeInlayParameterNameHints = "all",
---         includeInlayParameterNameHintsWhenArgumentMatchesName = true,
---         includeInlayFunctionParameterTypeHints = true,
---         includeInlayVariableTypeHints = true,
---         includeInlayVariableTypeHintsWhenTypeMatchesName = true,
---         includeInlayPropertyDeclarationTypeHints = true,
---         includeInlayFunctionLikeReturnTypeHints = true,
---         includeInlayEnumMemberValueHints = true,
---       },
---     },
---     javascript = {
---       inlayHints = {
---         includeInlayParameterNameHints = "all",
---         includeInlayParameterNameHintsWhenArgumentMatchesName = true,
---         includeInlayFunctionParameterTypeHints = true,
---         includeInlayVariableTypeHints = true,
---         includeInlayVariableTypeHintsWhenTypeMatchesName = true,
---         includeInlayPropertyDeclarationTypeHints = true,
---         includeInlayFunctionLikeReturnTypeHints = true,
---         includeInlayEnumMemberValueHints = true,
---       },
---     },
---   }
--- })
+vim.lsp.config('lua_ls', {
+  settings = {
+    Lua = {
+      diagnostics = {
+        enable = true,
+        globals = { "vim", "use", "Snacks" },
+      },
+      hint = {
+        enable = true
+      }
+    }
+  }
+})
 
-require('lspconfig').svelte.setup {
+vim.lsp.config('svelte', {
   settings = {
     typescript = {
       inlayHints = {
@@ -95,9 +68,9 @@ require('lspconfig').svelte.setup {
       },
     },
   },
-}
+})
 
-require("lspconfig").kotlin_language_server.setup({
+vim.lsp.config('kotlin_language_server', {
   settings = {
     kotlin = {
       hints = {
@@ -109,7 +82,7 @@ require("lspconfig").kotlin_language_server.setup({
   }
 })
 
-require("lspconfig").zls.setup({
+vim.lsp.config('zls', {
   settings = {
     zls = {
       enable_inlay_hints = true,
@@ -121,7 +94,7 @@ require("lspconfig").zls.setup({
   }
 })
 
-require("lspconfig").csharp_ls.setup({
+vim.lsp.config('csharp_ls', {
   settings = {
     csharp = {
       inlayHints = {
@@ -136,28 +109,12 @@ require("lspconfig").csharp_ls.setup({
   }
 })
 
---[[ require("lspconfig").omnisharp.setup({
+vim.lsp.config('ts_ls', {
   settings = {
-    RoslynExtensionsOptions = {
-      InlayHintsOptions = {
-        EnableForParameters = true,
-        ForLiteralParameters = true,
-        ForIndexerParameters = true,
-        ForObjectCreationParameters = true,
-        ForOtherParameters = true,
-        SuppressForParametersThatDifferOnlyBySuffix = false,
-        SuppressForParametersThatMatchMethodIntent = false,
-        SuppressForParametersThatMatchArgumentName = false,
-        EnableForTypes = true,
-        ForImplicitVariableTypes = true,
-        ForLambdaParameterTypes = true,
-        ForImplicitObjectCreatio = true,
-      },
-    },
+    ['ts_ls'] = {},
   }
-}) ]]
+})
 
-
-require("lspconfig").htmx.setup({
+vim.lsp.config('htmx', {
   filetypes = { "templ" },
 })

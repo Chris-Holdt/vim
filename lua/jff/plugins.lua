@@ -2,11 +2,49 @@ return {
   -- UI
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.5',
+    version = '*',
     dependencies = {
       'nvim-lua/plenary.nvim',
       "debugloop/telescope-undo.nvim",
       "nvim-telescope/telescope-live-grep-args.nvim",
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'make',
+      }
+    },
+  },
+  -- File tree for quick navigation, and referencing files
+  {
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = "v3.x",
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons',
+      'MunifTanjim/nui.nvim',
+    },
+    lazy = false,
+  },
+  -- File management
+  {
+    'stevearc/oil.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons',
+    },
+    lazy = false,
+  },
+  -- Show LSP diagnostics in oil buffers
+  {
+    'JezerM/oil-lsp-diagnostics.nvim',
+    dependencies = {
+      'stevearc/oil.nvim',
+    },
+    opts = {},
+  },
+  {
+    'benomahony/oil-git.nvim',
+    dependencies = {
+      'stevearc/oil.nvim',
     },
   },
   -- Debugging
@@ -25,6 +63,7 @@ return {
   { "nvim-tree/nvim-web-devicons" },
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = false,
     build = ":TSUpdate",
     dependencies = {
       {
@@ -125,15 +164,6 @@ return {
       "neovim/nvim-lspconfig",
       "nvim-treesitter/nvim-treesitter",
     },
-    config = function()
-      require("go").setup({
-        lsp_inlay_hints = {
-          enable = true,
-          style = "inlay",
-        },
-        lsp_cfg = true,
-      })
-    end,
     event = { "CmdlineEnter" },
     ft = { "go", 'gomod' },
     build = ':lua require("go.install").update_all_sync()'
@@ -164,19 +194,6 @@ return {
   {
     "brenoprata10/nvim-highlight-colors"
   },
-  -- Enhanced jumping
-  --[[ {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    opts = {},
-  }, ]]
-  -- Folding
-  --[[ {
-    "kevinhwang91/nvim-ufo",
-    dependencies = {
-      "kevinhwang91/promise-async"
-    }
-  }, ]]
   -- Indent guides
   {
     "lukas-reineke/indent-blankline.nvim",
@@ -200,6 +217,19 @@ return {
   {
     "github/copilot.vim"
   },
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = {
+      notifier = { enabled = true },
+    },
+  },
+  {
+    "coder/claudecode.nvim",
+    dependencies = { "folke/snacks.nvim" },
+    config = true,
+  },
   -- PHP support
   {
     "phpactor/phpactor"
@@ -222,22 +252,6 @@ return {
       },
     },
   },
-  -- Quickly jump buffers
-  --[[ {
-    "leath-dub/snipe.nvim",
-    config = function() -- Configuring in sepearate file not currently working
-      require("snipe").setup({
-        ui = {
-          position = "cursor",
-          open_win_override = {
-            border = "rounded"
-          }
-        },
-        sort = "last"
-      })
-    end,
-    opts = {}
-  }, ]]
   -- Automatically save and load sessions, no thinking required
   {
     'rmagatti/auto-session',
@@ -248,6 +262,7 @@ return {
     ---@type AutoSession.Config
     opts = {
       suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+      pre_save_cmds = { "Neotree close" },
       -- log_level = 'debug',
     }
   },
@@ -257,26 +272,6 @@ return {
     dependencies = { "MunifTanjim/nui.nvim" },
     opts = {}
   },
-  -- Shhhh Emacs Org mode
-  --[[ {
-    'nvim-orgmode/orgmode',
-    event = 'VeryLazy',
-    ft = { 'org' },
-  }, ]]
-  --[[ {
-    'akinsho/org-bullets.nvim',
-    config = function()
-      require("org-bullets").setup()
-    end
-  }, ]]
-  --[[ {
-    "nvim-orgmode/telescope-orgmode.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "nvim-orgmode/orgmode",
-      "nvim-telescope/telescope.nvim",
-    },
-  }, ]]
   {
     "zaldih/themery.nvim",
     lazy = false,
@@ -311,16 +306,12 @@ return {
     "AlexvZyl/nordic.nvim",
     lazy = false,
     priority = 1000,
-    config = function()
-      require('nordic').load()
-    end
   },
   {
     "rose-pine/neovim",
     name = "rose-pine",
-    config = function()
-      vim.cmd("colorscheme rose-pine")
-    end
+    lazy = false,
+    priority = 1000,
   },
   {
     "scottmckendry/cyberdream.nvim",
